@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Pyramid Project </title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="MarioStyles.css" media="screen" />
+
+</head>
+
+<body>
+    <header>
+        <h1> Pyramid Slide </h1>
+    </header>
+    <div id = "content">
+    <div id = "adjustments">
+
+    <form action="/action_page.php" id = "dropDown">
+        <select id="select" name="select" onchange="SelectSymbol()">
+            <option value="1">#</option>
+            <option value="2">@</option>
+            <option value="3">%</option>
+            <option value="4">X</option>
+        </select>
+    </form>
+
+    <div>
+        <input type="range" id = "HeightRange" oninput="myPyramid()" value="15" min="3" max="15"></input>
+        <p id = "demo"></p>
+    </div>
+    </div>
+    <div id="pyramid">
+        <div id="construction">
+        </div>
+    </div>
+</div>
+    <script>
+
+var z = "#"
+
+    function SelectSymbol(){
+        var symbol = document.getElementById('select');
+
+        if (symbol.value == "1"){
+            z = "#";
+        }
+        else if (symbol.value == "2"){
+            z = "@";
+        }
+
+        else if (symbol.value == "3"){
+            z = "%";
+        }
+
+        else{
+            z = "X";
+        }
+        console.log(z);
+    }
+
+        function myPyramid() {
+            var x = document.getElementById("HeightRange").value;
+            document.getElementById("demo").innerHTML = x;
+
+        console.log("here"+ z);
+        drawPyramid(x, z);
+        console.log(z);
+
+        function drawPyramid(height, symbol){
+
+            var construction = document.getElementById("construction");
+            construction.innerHTML = "";
+
+            for (var row = 0; row < height; row++) {
+
+                var numBricks = row + 2;
+                var numSpaces = height - row - 1;
+
+                var rowStr = "";
+                for (var i = 0; i < numSpaces; i++) {
+                    rowStr += ".";
+                }
+
+                for (var i = 0; i < numBricks; i++) {
+                    rowStr += symbol;
+                }
+
+                var domRow = document.createElement("p");
+                domRow.append(rowStr);
+
+                construction.append(domRow)
+
+                console.log(rowStr)
+            }
+        }
+    }
+
+    </script>
+</body>
+
+
+</html>
